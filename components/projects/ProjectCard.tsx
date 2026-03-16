@@ -48,11 +48,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </span>
           </div>
           <div className="absolute top-4 right-4">
-            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-              project.status === 'ongoing' ? 'bg-green-500 text-white' :
-              project.status === 'completed' ? 'bg-blue-500 text-white' :
-              'bg-yellow-500 text-white'
-            }`}>
+            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${project.status === 'ongoing' ? 'bg-green-500 text-white' :
+                project.status === 'completed' ? 'bg-blue-500 text-white' :
+                  'bg-yellow-500 text-white'
+              }`}>
               {project.status}
             </span>
           </div>

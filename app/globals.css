@@ -3,495 +3,217 @@
 @tailwind utilities;
 
 :root {
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-playfair: 'Playfair Display', serif;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+
+  /* Luxury Theme Colors - Enhanced (Tokens in tailwind.config.js) */
+  --prestige-navy: #0A1128;
+  --prestige-gold: #D4AF37;
+  --prestige-gold-alt: #C4843B;
+  --prestige-dark: #121212;
+  --prestige-accent: #B08D57;
+  --prestige-white: #FFFFFF;
+  --prestige-cream: #F9F7F2;
+  --wood-dark: #3D1A0A;
+  --wood-darkest: #1A0800;
 }
 
 @layer base {
-  html {
+  body {
+    @apply bg-white text-prestige-navy font-sans antialiased;
     scroll-behavior: smooth;
   }
 
-  body {
-    /* Avoid Tailwind @apply hard-failing if config utilities aren't loaded yet */
-    background: #F5F3E7;
-    color: #0F1624;
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-merriweather), serif !important;
+    font-weight: 300 !important;
+    font-size: 24px;
+    /* 18pt - No !important to allow overrides */
+  }
+
+  h4,
+  h5,
+  h6,
+  .font-subheading {
+    font-family: var(--font-open-sans), sans-serif !important;
+    font-weight: 300 !important;
+  }
+
+  .font-playfair {
+    font-family: var(--font-playfair), serif;
+  }
+
+  .font-merriweather {
+    font-family: var(--font-merriweather), serif;
+  }
+
+  .font-open-sans {
+    font-family: var(--font-open-sans), sans-serif;
+  }
+
+  .font-cormorant {
+    font-family: var(--font-cormorant), serif;
+  }
+
+  .font-cormorant-garamond {
+    font-family: var(--font-cormorant-garamond), serif;
+  }
+
+  .font-bebas {
+    font-family: var(--font-bebas), cursive;
+  }
+
+  .font-outfit {
+    font-family: var(--font-outfit), sans-serif;
+  }
+
+  .font-dm-serif {
+    font-family: var(--font-dm-serif), serif;
   }
 }
 
 @layer components {
-  .btn-primary {
-    /* Equivalent of bg-prestige-gold text-prestige-navy px-6 py-3 rounded-lg font-semibold
-       hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105; */
-    background-color: #D4AF37;
-    color: #1A2B4A;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: all 300ms ease;
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .btn-primary:hover {
-    filter: brightness(0.95);
-    transform: scale(1.05);
+  /* Luxury Button Style */
+  .button-89 {
+    @apply relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-prestige-navy rounded-lg hover:bg-prestige-navy/90 active:scale-95 shadow-lg shadow-black/20;
+  }
+
+  .button-gold {
+    @apply relative inline-flex items-center justify-center px-8 py-3 font-bold text-prestige-navy transition-all duration-300 bg-prestige-gold rounded-lg hover:bg-prestige-gold/90 active:scale-95 shadow-lg;
   }
 
   .btn-secondary {
-    /* Equivalent of border-2 border-prestige-gold text-prestige-gold px-6 py-3 rounded-lg font-semibold
-       hover:bg-prestige-gold hover:text-prestige-navy transition-all duration-300; */
-    background-color: transparent;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #D4AF37;
-    color: #D4AF37;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: all 300ms ease;
+    @apply relative inline-flex items-center justify-center px-8 py-3 font-bold transition-all duration-300 bg-white border border-prestige-navy text-prestige-navy rounded-lg hover:bg-prestige-navy hover:text-white active:scale-95;
   }
 
-  .btn-secondary:hover {
-    background-color: #D4AF37;
-    color: #1A2B4A;
+  /* WOOD NAV / HEADER STYLES */
+  .wood-header-gradient {
+    background: linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-darkest) 100%);
   }
 
-  .card-hover {
-    transition: all 300ms ease;
+  .wood-grain-overlay {
+    background-image: url('https://www.transparenttextures.com/patterns/black-wood.png');
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+    opacity: 0.15;
   }
 
-  .card-hover:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    transform: translateY(-0.5rem);
+  .wood-vignette {
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
   }
 
+  .wood-top-bar {
+    @apply bg-prestige-wood-darkest;
+  }
+
+  .wood-nav-link {
+    @apply text-prestige-wood-light tracking-[0.22em] uppercase font-cormorant-garamond font-medium;
+  }
+
+  .wood-nav-link:hover,
+  .wood-nav-link.active {
+    @apply text-prestige-gold-alt;
+  }
+
+  .wood-cta-btn {
+    @apply bg-gradient-to-br from-[#C4843B] to-[#A06828] text-prestige-wood-darkest tracking-[0.25em] uppercase font-cormorant-garamond rounded-[2px] hover:shadow-lg transition-all;
+  }
+
+  /* FOOTER STYLES */
+  .footer-bg-main {
+    background: linear-gradient(to bottom, #111111 0%, #000000 100%);
+  }
+
+  .footer-grain-overlay {
+    @apply absolute inset-0 pointer-events-none opacity-5 z-0;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+  }
+
+  .footer-col-head {
+    @apply text-[#E8C97A] text-[10px] uppercase tracking-[0.45em] mb-7 block;
+  }
+
+  .footer-nav-link {
+    @apply text-[13px] text-white/45 hover:text-[#E8C97A] border-b border-transparent hover:border-[#E8C97A] transition-all pb-0.5;
+  }
+
+  .footer-social-btn {
+    @apply w-9 h-9 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/40 hover:bg-prestige-gold-alt hover:text-prestige-wood-darkest hover:border-prestige-gold-alt transition-all;
+  }
+
+  .footer-contact-icon {
+    @apply w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-[#E8C97A];
+  }
+
+  .footer-divider {
+    @apply h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent;
+  }
+
+  .footer-watermark {
+    @apply font-bebas text-[8rem] leading-none text-white opacity-[0.02] pointer-events-none select-none;
+  }
+
+  /* SECTION STYLES */
   .section-padding {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    @apply py-20 md:py-32;
   }
 
-  @media (min-width: 768px) {
-    .section-padding {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-    }
+  /* HERO SECTION STYLES */
+  .hero-overlay-gradient {
+    background: linear-gradient(to top, #060b14 0%, rgba(6, 11, 20, 0.8) 40%, transparent 100%);
   }
 
-  .container-custom {
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .hero-stripe {
+    background: linear-gradient(to bottom, transparent, rgba(79, 195, 195, 0.2), transparent);
   }
 
-  @media (min-width: 640px) {
-    .container-custom {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
+  .hero-stripe-2 {
+    background: linear-gradient(to bottom, transparent, rgba(232, 201, 122, 0.15), transparent);
   }
 
-  @media (min-width: 1024px) {
-    .container-custom {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
+  .label-dot {
+    @apply shadow-[0_0_10px_#4FC3C3];
+  }
+
+  .hero-title-outline {
+    @apply relative text-transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-hero-primary {
+    @apply shadow-hero-primary hover:shadow-hero-primary-hover hover:-translate-y-0.5 transition-all;
+  }
+
+  .search-card-blur {
+    @apply bg-white/5 backdrop-blur-3xl border border-white/10 shadow-search-card;
+  }
+
+  .search-tab-active {
+    @apply shadow-tab-active;
+  }
+
+  .search-input {
+    @apply focus:bg-white/10 focus:border-prestige-gold/40 transition-all;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f3e7;
+  @apply bg-prestige-cream;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #b8941f;
-}
-
-/* Button 89 Custom Style */
-.button-89 {
-  --b: 3px;
-  /* border thickness */
-  --s: .45em;
-  /* size of the corner */
-  --color: #373B44;
-
-  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
-  color: var(--color);
-  --_p: var(--s);
-  background:
-    conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
-  transition: .3s linear, color 0s, background-color 0s;
-  outline: var(--b) solid #0000;
-  outline-offset: .6em;
-  font-size: 16px;
-  font-weight: 600;
-
-  border: 0;
-
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  cursor: pointer;
-}
-
-.button-89:hover,
-.button-89:focus-visible {
-  --_p: 0px;
-  outline-color: var(--color);
-  outline-offset: .05em;
-}
-
-.button-89:active {
-  background: var(--color);
-  color: #fff;
-}
-
-/* Wood Theme Styles */
-:root {
-  --wood-dark: #1A0800;
-  --wood-mid: #2A1208;
-  --wood-warm: #3D1A0A;
-  --gold: #C4843B;
-  --gold-light: #DBA05A;
-  --gold-pale: #F5E1B8;
-  --text-warm: rgba(245, 225, 185, 0.82);
-  --text-muted: rgba(196, 132, 59, 0.65);
-}
-
-.font-cormorant {
-  font-family: var(--font-cormorant), serif;
-}
-
-.font-cormorant-garamond {
-  font-family: var(--font-cormorant-garamond), serif;
-}
-
-/* Header Specifics */
-.wood-header-gradient {
-  background: linear-gradient(180deg, var(--wood-mid) 0%, var(--wood-warm) 60%, #4A2010 100%);
-}
-
-.wood-grain-overlay {
-  background-image:
-    repeating-linear-gradient(90deg,
-      transparent 0px,
-      rgba(255, 220, 150, 0.022) 1px,
-      transparent 3px,
-      transparent 10px,
-      rgba(139, 69, 19, 0.055) 11px,
-      transparent 13px,
-      transparent 24px,
-      rgba(255, 200, 100, 0.015) 25px,
-      transparent 27px,
-      transparent 42px,
-      rgba(100, 50, 10, 0.04) 43px,
-      transparent 44px,
-      transparent 68px,
-      rgba(200, 140, 60, 0.03) 69px,
-      transparent 71px),
-    repeating-linear-gradient(89.5deg,
-      transparent 0px,
-      rgba(220, 160, 80, 0.018) 4px,
-      transparent 5px,
-      transparent 90px);
-}
-
-.wood-vignette {
-  background: linear-gradient(90deg,
-      rgba(0, 0, 0, 0.25) 0%,
-      transparent 15%,
-      transparent 85%,
-      rgba(0, 0, 0, 0.25) 100%);
-}
-
-.wood-top-bar {
-  background: linear-gradient(90deg, var(--wood-dark), var(--wood-mid), var(--wood-dark));
-}
-
-.wood-nav-link {
-  font-family: var(--font-cormorant-garamond), serif;
-  color: var(--text-warm);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.wood-nav-link:hover,
-.wood-nav-link.active {
-  color: var(--gold);
-}
-
-.wood-cta-btn {
-  background: linear-gradient(135deg, #C4843B 0%, #A06828 50%, #C4843B 100%);
-  color: #1A0800;
-  font-family: var(--font-cormorant-garamond), serif;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  background-size: 200% 100%;
-  transition: all 0.35s;
-}
-
-.wood-cta-btn:hover {
-  background-position: 100% 0;
-  transform: translateY(-1px);
-}
-
-/* Dark Hero Theme Styles */
-:root {
-  --white: #ffffff;
-  --off: rgba(255, 255, 255, 0.85);
-  --dim: rgba(255, 255, 255, 0.45);
-  --accent: #E8C97A;
-  --accent2: #4FC3C3;
-  --dark: rgba(8, 12, 20, 0.92);
-}
-
-/* Hero Animations */
-@keyframes slowZoom {
-  from {
-    transform: scale(1.04);
-  }
-
-  to {
-    transform: scale(1.00);
-  }
-}
-
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scanLine {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 100%;
-  }
-}
-
-/* Hero Specific Classes */
-.hero-overlay-gradient {
-  background:
-    linear-gradient(to right, rgba(6, 10, 20, 0.85) 0%, rgba(6, 10, 20, 0.4) 60%, rgba(6, 10, 20, 0.2) 100%),
-    linear-gradient(to top, rgba(6, 10, 20, 0.95) 0%, rgba(6, 10, 20, 0.0) 60%);
-}
-
-@media (max-width: 1023px) {
-  .hero-overlay-gradient {
-    background:
-      linear-gradient(to bottom, rgba(6, 10, 20, 0.8) 0%, rgba(6, 10, 20, 0.4) 50%, rgba(6, 10, 20, 0.1) 100%),
-      linear-gradient(to top, rgba(6, 10, 20, 0.95) 0%, rgba(6, 10, 20, 0.3) 100%);
-  }
-}
-
-.hero-stripe {
-  background: linear-gradient(180deg, transparent 0%, rgba(232, 201, 122, 0.25) 30%, rgba(232, 201, 122, 0.12) 70%, transparent 100%);
-}
-
-.hero-stripe-2 {
-  background: linear-gradient(180deg, transparent 10%, rgba(232, 201, 122, 0.08) 40%, transparent 80%);
-}
-
-.hero-title-outline {
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
-  color: transparent;
-}
-
-.label-dot {
-  box-shadow: 0 0 10px var(--accent2);
-}
-
-.btn-hero-primary {
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 12px 100%);
-  box-shadow: 0 8px 32px rgba(232, 201, 122, 0.35);
-}
-
-.btn-hero-primary:hover {
-  background: #fff;
-  box-shadow: 0 12px 48px rgba(232, 201, 122, 0.5);
-  transform: translateY(-2px);
-}
-
-.search-card-blur {
-  background: rgba(8, 12, 22, 0.78);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.search-tab-active svg {
-  stroke: #0a0c10;
-}
-
-.search-input:focus {
-  border-color: rgba(232, 201, 122, 0.5);
-  background: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 0 0 3px rgba(232, 225, 122, 0.08);
-}
-
-/* ─────────────────────────────── MODERN DARK FOOTER ─── */
-.footer-bg-main {
-  background-image: url('/675614.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.footer-bg-main::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(6, 10, 20, 0.9) 0%, rgba(6, 10, 20, 0.98) 100%);
-}
-
-.footer-grain-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-}
-
-.footer-col-head {
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.22);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-col-head::after {
-  content: '';
-  width: 20px;
-  height: 1.5px;
-  background: #C4843B;
-  opacity: 0.5;
-}
-
-.footer-social-btn {
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s;
-}
-
-.footer-social-btn:hover {
-  border-color: #E8C97A;
-  color: #E8C97A;
-  background: rgba(232, 201, 122, 0.07);
-  transform: translateY(-2px);
-}
-
-.footer-watermark {
-  margin-top: 8px;
-  font-family: var(--font-bebas), sans-serif;
-  font-size: 4rem;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.04);
-  user-select: none;
-  pointer-events: none;
-}
-
-.footer-contact-icon {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(196, 132, 59, 0.2);
-  color: #C4843B;
-}
-
-.footer-nav-link {
-  position: relative;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.45);
-  text-decoration: none;
-  padding-bottom: 2px;
-  transition: color 0.22s;
-  display: inline-block;
-}
-
-.footer-nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #E8C97A;
-  transition: width 0.28s;
-}
-
-.footer-nav-link:hover {
-  color: #E8C97A;
-}
-
-.footer-nav-link:hover::after {
-  width: 100%;
-}
-
-.footer-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.1) 80%, transparent 100%);
-  margin-bottom: 16px;
+  @apply bg-prestige-gold/50 rounded-full hover:bg-prestige-gold;
 }

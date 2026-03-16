@@ -52,22 +52,43 @@ interface Project {
   hero_image_url: string
 }
 
+const FALLBACK_PROJECTS = [
+  {
+    id: '1',
+    name: 'Modern Sky Penthouse',
+    slug: 'modern-sky-penthouse',
+    category: 'Penthouse',
+    location_coords: { lat: 30.7333, lng: 76.7794 },
+    price_min: 25000000,
+    hero_image_url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop',
+  },
+  {
+    id: '2',
+    name: 'Azure Marina Villa',
+    slug: 'azure-marina-villa',
+    category: 'Villa',
+    location_coords: { lat: 30.7100, lng: 76.7500 },
+    price_min: 48000000,
+    hero_image_url: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop',
+  },
+  {
+    id: '3',
+    name: 'The Golden Residence',
+    slug: 'the-golden-residence',
+    category: 'Apartment',
+    location_coords: { lat: 30.7500, lng: 76.8000 },
+    price_min: 12000000,
+    hero_image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop',
+  }
+];
+
 export default function InteractiveMap() {
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<Project[]>(FALLBACK_PROJECTS)
 
   useEffect(() => {
-    fetchProjects()
+    // In a production environment, you would fetch these from Supabase
+    // const fetchProjects = async () => { ... }
   }, [])
-
-  const fetchProjects = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/projects?limit=10`)
-      const data = await res.json()
-      setProjects(data.projects || [])
-    } catch (error) {
-      console.error('Failed to fetch projects:', error)
-    }
-  }
 
   // Pre-calculate center or default to Chandigarh
   const center = { lat: 30.7333, lng: 76.7794 }

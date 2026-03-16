@@ -14,30 +14,41 @@ interface Testimonial {
   project_id?: string
 }
 
+const FALLBACK_TESTIMONIALS = [
+  {
+    id: '1',
+    client_name: 'Sarah Mitchell',
+    client_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&h=150&auto=format&fit=crop',
+    rating: 5,
+    testimonial_text: 'The experience with Prestige was beyond expectations. They found us our dream penthouse in record time. Professionalism at its finest.',
+  },
+  {
+    id: '2',
+    client_name: 'David Chen',
+    client_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop',
+    rating: 5,
+    testimonial_text: 'Searching for a luxury villa in Palm Jumeirah seemed daunting until I met the Prestige team. Their local knowledge is unmatched.',
+  },
+  {
+    id: '3',
+    client_name: 'Aisha Rahman',
+    client_photo_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&auto=format&fit=crop',
+    rating: 5,
+    testimonial_text: 'Investing in real estate has never been smoother. The ROI on the property they recommended has already exceeded my targets.',
+  }
+];
+
 export default function TestimonialsCarousel() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK_TESTIMONIALS)
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
-    fetchTestimonials()
-  }, [])
-
-  useEffect(() => {
+    if (testimonials.length === 0) return
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     return () => clearInterval(interval)
   }, [testimonials.length])
-
-  const fetchTestimonials = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/testimonials?featured=true`)
-      const data = await res.json()
-      setTestimonials(data.testimonials || [])
-    } catch (error) {
-      console.error('Failed to fetch testimonials:', error)
-    }
-  }
 
   if (testimonials.length === 0) return null
 
@@ -103,9 +114,8 @@ export default function TestimonialsCarousel() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentIndex ? 'bg-prestige-gold w-8' : 'bg-white/30'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? 'bg-prestige-gold w-8' : 'bg-white/30'
+                  }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}

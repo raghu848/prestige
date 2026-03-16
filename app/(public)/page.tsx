@@ -1,5 +1,6 @@
 import HeroSection from '@/components/sections/HeroSection'
 import FeaturedProjects from '@/components/sections/FeaturedProjects'
+import ConstellationSection from '@/components/sections/ConstellationSection'
 import InteractiveMap from '@/components/sections/InteractiveMap'
 import TestimonialsCarousel from '@/components/sections/TestimonialsCarousel'
 import WhyPrestige from '@/components/sections/WhyPrestige'
@@ -15,6 +16,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <FeaturedProjects />
+      <ConstellationSection />
       <InteractiveMap />
       <TestimonialsCarousel />
       <WhyPrestige />
