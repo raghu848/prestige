@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Cormorant_Garamond, Cormorant, Bebas_Neue, Outfit, DM_Serif_Display } from 'next/font/google'
+import { Inter, Playfair_Display, Cormorant_Garamond, Cormorant, Bebas_Neue, Outfit, DM_Serif_Display, Open_Sans, Merriweather } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -52,6 +52,20 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: '400',
 })
 
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-open-sans',
+  display: 'swap',
+  weight: ['300', '400'],
+})
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  variable: '--font-merriweather',
+  display: 'swap',
+  weight: ['300', '400'],
+})
+
 export const metadata: Metadata = {
   title: 'Prestige Realty - Premium Real Estate in Chandigarh',
   description: 'Discover luxury residential, commercial, and leasing projects across premium markets. Expert real estate solutions with world-class amenities.',
@@ -69,13 +83,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${cormorantGaramond.variable} ${cormorant.variable} ${bebasNeue.variable} ${outfit.variable} ${dmSerifDisplay.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} ${cormorantGaramond.variable} ${cormorant.variable} ${bebasNeue.variable} ${outfit.variable} ${dmSerifDisplay.variable} ${openSans.variable} ${merriweather.variable}`}>
       <body className="font-sans antialiased">
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        {children}
         <Toaster position="top-right" />
       </body>
     </html>
