@@ -42,6 +42,6 @@ export async function login(formData: FormData) {
 
 export async function signOut() {
     const supabase = await createClient()
-    await supabase.auth.signOut()
+    await supabase?.auth.signOut()
     redirect('/agent/login')
 }
