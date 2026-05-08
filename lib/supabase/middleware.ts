@@ -39,9 +39,16 @@ export async function updateSession(request: NextRequest) {
     // getUser(). A simple mistake could make it very hard to debug
     // issues with sessions being lost.
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+    let user = null;
+    try {
+        const { data: { user: fetchedUser }, error: userError } = await supabase.auth.getUser();
+        if (!userError) {
+            user = fetchedUser;
+        }
+    } catch (err) {
+        console.error('SUPABASE CONNECTION ERROR IN MIDDLEWARE:', err);
+        // Fallback: If we can't connect, we treat the user as unauthenticated but don't crash
+    }
 
     if (
         !user &&

@@ -254,22 +254,23 @@ export default function ConstellationSection() {
 
         .node-name {
           font-family: 'Cormorant Garamond', Georgia, serif;
-          font-weight: 400;
-          font-size: 13px;
-          letter-spacing: 0.06em;
-          color: #1a1613;
+          font-weight: 600;
+          font-size: 15px;
+          letter-spacing: 0.08em;
+          color: #D4AF37; /* Prestige Gold */
           white-space: nowrap;
           line-height: 1.3;
           transition: opacity 0.5s ease, transform 0.5s ease;
           text-align: center;
           pointer-events: none;
           user-select: none;
+          text-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .card-title {
           font-family: 'Cormorant Garamond', Georgia, serif;
           font-weight: 400;
-          color: #1a1613;
+          color: #fff;
           line-height: 1.15;
           letter-spacing: -0.01em;
         }
@@ -280,7 +281,7 @@ export default function ConstellationSection() {
           font-size: 10px;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #9a8f85;
+          color: rgba(255, 255, 255, 0.5);
         }
 
         .card-desc {
@@ -288,7 +289,7 @@ export default function ConstellationSection() {
           font-weight: 300;
           font-size: 14px;
           line-height: 1.7;
-          color: #5c544e;
+          color: rgba(255, 255, 255, 0.7);
         }
 
         .card-link {
@@ -297,7 +298,7 @@ export default function ConstellationSection() {
           font-size: 10.5px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #1a1613;
+          color: #D4AF37;
           display: inline-flex;
           align-items: center;
           gap: 8px;
@@ -313,7 +314,7 @@ export default function ConstellationSection() {
           left: 0;
           right: 0;
           height: 1px;
-          background: #1a1613;
+          background: #D4AF37;
           transform: scaleX(0.3);
           transform-origin: left;
           transition: transform 0.35s ease;
@@ -367,11 +368,12 @@ export default function ConstellationSection() {
 
         .section-label {
           font-family: 'Jost', sans-serif;
-          font-weight: 200;
-          font-size: 10px;
-          letter-spacing: 0.35em;
+          font-weight: 400;
+          font-size: 12px;
+          letter-spacing: 0.45em;
           text-transform: uppercase;
-          color: #b0a89e;
+          color: #D4AF37;
+          text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
       `}</style>
 
@@ -382,10 +384,23 @@ export default function ConstellationSection() {
         style={{
           height: '100svh',
           minHeight: '600px',
-          backgroundColor: '#f2ede7',
+          backgroundColor: 'transparent',
           cursor: hoveredNode ? 'none' : 'default',
         }}
       >
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260322_013248_a74099a8-be2b-4164-a823-eddd5e149fa1.mp4"
+            type="video/mp4"
+          />
+        </video>
         {/* Grain texture */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06]" style={{ zIndex: 1 }}>
           <filter id="grain">
@@ -399,9 +414,15 @@ export default function ConstellationSection() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 50%, rgba(210,200,188,0.22) 100%)',
+            background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
             zIndex: 2,
           }}
+        />
+
+        {/* Subtle dark overlay for readability */}
+        <div 
+          className="absolute inset-0 pointer-events-none bg-black/20" 
+          style={{ zIndex: 1 }} 
         />
 
         {/* Top label */}
@@ -415,7 +436,7 @@ export default function ConstellationSection() {
           }}
         >
           <span className="section-label">The Group</span>
-          <div style={{ width: '1px', height: '28px', background: 'linear-gradient(to bottom, #b0a89e, transparent)' }} />
+          <div style={{ width: '1px', height: '28px', background: 'linear-gradient(to bottom, #D4AF37, transparent)' }} />
         </div>
 
         {/* Floating ambient particles */}
@@ -520,12 +541,12 @@ export default function ConstellationSection() {
                   width: `${node.size}px`,
                   height: `${node.size}px`,
                   borderRadius: '50%',
-                  background: `radial-gradient(circle, ${node.glowColor} 0%, transparent 70%)`,
+                  background: `radial-gradient(circle, ${node.glowColor.replace('0.35', '0.6').replace('0.38', '0.65').replace('0.4', '0.7')} 0%, transparent 70%)`,
                   left: `${-node.size / 2}px`,
                   top: `${-node.size / 2}px`,
-                  filter: 'blur(18px)',
-                  transform: isHovered ? 'scale(1.35)' : 'scale(1)',
-                  opacity: isHovered ? 1 : 0.7,
+                  filter: 'blur(22px)',
+                  transform: isHovered ? 'scale(1.5)' : 'scale(1)',
+                  opacity: isHovered ? 1 : 0.85,
                   transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease',
                   animation: `glowBreath ${3.5 + index * 0.4}s ${index * 0.3}s ease-in-out infinite`,
                 }}
@@ -602,10 +623,10 @@ export default function ConstellationSection() {
                   style={{
                     width: isHovered ? '8px' : '6px',
                     height: isHovered ? '8px' : '6px',
-                    backgroundColor: isHovered ? node.glowColorRaw : '#1a1613',
+                    backgroundColor: isHovered ? node.glowColorRaw : '#fff',
                     borderRadius: '50%',
                     transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                    boxShadow: isHovered ? `0 0 12px ${node.glowColorRaw}` : 'none',
+                    boxShadow: isHovered ? `0 0 16px ${node.glowColorRaw}` : '0 0 10px rgba(255,255,255,0.6)',
                   }}
                 />
               </div>
@@ -671,13 +692,13 @@ export default function ConstellationSection() {
           {activeNode && (
             <div
               style={{
-                background: 'rgba(247, 243, 238, 0.96)',
-                backdropFilter: 'blur(16px)',
-                border: '1px solid rgba(190,180,168,0.5)',
-                borderRadius: '3px',
+                background: 'rgba(15, 15, 15, 0.85)',
+                backdropFilter: 'blur(24px)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '8px',
                 padding: activeNode.isCenter ? '36px' : '28px',
                 boxShadow:
-                  '0 4px 24px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
+                  '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
                 position: 'relative',
                 overflow: 'hidden',
               }}
@@ -753,11 +774,11 @@ export default function ConstellationSection() {
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           style={{
             zIndex: 10,
-            opacity: mounted ? (hoveredNode ? 0 : 0.6) : 0,
+            opacity: mounted ? (hoveredNode ? 0 : 0.8) : 0,
             transition: 'all 0.6s ease',
           }}
         >
-          <div style={{ width: '1px', height: '28px', background: 'linear-gradient(to top, #b0a89e, transparent)' }} />
+          <div style={{ width: '1px', height: '28px', background: 'linear-gradient(to top, #D4AF37, transparent)' }} />
           <span className="section-label">Hover to explore</span>
         </div>
       </section>
