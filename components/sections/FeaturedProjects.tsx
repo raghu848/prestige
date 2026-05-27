@@ -86,8 +86,12 @@ export default async function FeaturedProjects() {
   }
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container-custom">
+    <section className="py-24 bg-gradient-to-b from-slate-950 via-[#0a0f24] to-slate-950 overflow-hidden relative z-10">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none z-0" />
+
+      <div className="container-custom relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <SectionHeader
             title="Featured Properties"
@@ -95,10 +99,10 @@ export default async function FeaturedProjects() {
           />
           <Link
             href="/properties"
-            className="group flex items-center text-prestige-gold font-bold hover:text-prestige-navy transition-colors"
+            className="group flex items-center text-amber-400 font-bold hover:text-amber-300 transition-colors no-underline text-sm uppercase tracking-wider"
           >
             Explore All Properties
-            <ArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" size={20} />
+            <ArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" size={18} />
           </Link>
         </div>
 

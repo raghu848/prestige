@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import Link from 'next/link'
 import { MapPin, Bed, Bath, Square, Calendar, CheckCircle2, ArrowRight } from 'lucide-react'
 import InquiryForm from '@/components/forms/InquiryForm'
@@ -44,8 +44,8 @@ export default async function ProjectDetailPage({
         <div className="min-h-screen bg-white pt-20">
             {/* Hero Banner */}
             <section className="relative h-[70vh] w-full overflow-hidden">
-                <Image
-                    src={property.featured_image || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop'}
+                <SafeImage
+                    src={property.featured_image}
                     alt={property.title}
                     fill
                     className="object-cover"

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, Quote } from 'lucide-react'
-import Image from 'next/image'
+import { Star, Quote, ArrowLeft, ArrowRight } from 'lucide-react'
+import SafeImage from '@/components/ui/SafeImage'
 
 interface Testimonial {
   id: string
@@ -50,81 +50,121 @@ export default function TestimonialsCarousel() {
     return () => clearInterval(interval)
   }, [testimonials.length])
 
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+
   if (testimonials.length === 0) return null
 
+  const active = testimonials[currentIndex]
+
   return (
-    <section className="section-padding bg-prestige-navy text-white">
-      <div className="container-custom">
+    <section className="py-24 bg-gradient-to-b from-[#020617] to-slate-950 overflow-hidden relative z-10">
+      {/* Decorative backdrop glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[130px] pointer-events-none z-0" />
+
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
             What Our Clients Say
           </h2>
-          <p className="text-xl text-gray-300">
-            Trusted by thousands of satisfied customers
+          <p className="text-xl text-slate-400">
+            Real experiences from real clients
           </p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12"
-            >
-              <Quote className="text-prestige-gold mb-4" size={40} />
-              <p className="text-xl md:text-2xl mb-6 text-gray-100">
-                "{testimonials[currentIndex]?.testimonial_text}"
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  {testimonials[currentIndex]?.client_photo_url && (
-                    <Image
-                      src={testimonials[currentIndex].client_photo_url}
-                      alt={testimonials[currentIndex].client_name}
-                      width={60}
-                      height={60}
-                      className="rounded-full"
-                    />
-                  )}
-                  <div>
-                    <p className="font-semibold text-lg">{testimonials[currentIndex]?.client_name}</p>
-                    <div className="flex items-center space-x-1 mt-1">
-                      {[...Array(testimonials[currentIndex]?.rating || 5)].map((_, i) => (
-                        <Star key={i} size={16} className="fill-prestige-gold text-prestige-gold" />
-                      ))}
+        <div className="max-w-4xl mx-auto">
+          {/* Main Card Container */}
+          <div className="relative bg-slate-900/30 backdrop-blur-md border border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl hover:border-amber-500/20 transition-all duration-500">
+            <Quote className="absolute top-6 right-8 text-amber-500/5" size={60} />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Testimonial Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center gap-1 mb-6 text-amber-400">
+                    {[...Array(active.rating)].map((_, i) => (
+                      <Star key={i} size={18} fill="currentColor" />
+                    ))}
+                  </div>
+
+                  <p className="text-xl md:text-2xl text-slate-100 font-display italic leading-relaxed mb-8">
+                    "{active.testimonial_text}"
+                  </p>
+
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      {active.client_photo_url && (
+                        <SafeImage
+                          src={active.client_photo_url}
+                          alt={active.client_name}
+                          width={50}
+                          height={50}
+                          className="rounded-full"
+                        />
+                      )}
+                      <div>
+                        <h4 className="font-bold text-white text-lg">{active.client_name}</h4>
+                      </div>
+                    </div>
+
+                    {/* Navigation controls */}
+                    <div className="flex items-center gap-8">
+                      {/* Dots */}
+                      <div className="flex gap-2">
+                        {testimonials.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentIndex(index)}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${currentIndex === index
+                              ? 'bg-gradient-to-r from-amber-400 to-amber-500 w-8'
+                              : 'bg-white/10 hover:bg-white/20'
+                              }`}
+                            aria-label={`Go to slide ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Buttons */}
+                      <div className="flex gap-2">
+                        <button
+                          onClick={prevSlide}
+                          className="p-3 rounded-full border border-white/10 text-white bg-white/5 hover:border-amber-500/30 hover:text-amber-300 transition-all"
+                          aria-label="Previous testimonial"
+                        >
+                          <ArrowLeft size={16} />
+                        </button>
+                        <button
+                          onClick={nextSlide}
+                          className="p-3 rounded-full border border-white/10 text-white bg-white/5 hover:border-amber-500/30 hover:text-amber-300 transition-all"
+                          aria-label="Next testimonial"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Dots */}
-          <div className="flex justify-center space-x-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? 'bg-prestige-gold w-8' : 'bg-white/30'
-                  }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
     </section>
   )
 }
+
 
 
 

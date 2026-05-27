@@ -1,7 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectFilters from '@/components/projects/ProjectFilters'
-import { motion } from 'framer-motion'
 import { Suspense } from 'react'
 
 export default async function ProjectsPage(props: {

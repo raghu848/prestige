@@ -110,7 +110,7 @@ export default function BlogForm({ initialData }: BlogFormProps) {
     return (
         <form onSubmit={handleSubmit} className="max-w-4xl space-y-8 pb-20">
             {/* Header / Actions Sidebar Style */}
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-6">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Title */}
                     <div className="md:col-span-2">
@@ -209,11 +209,11 @@ export default function BlogForm({ initialData }: BlogFormProps) {
             </div>
 
             {/* Sticky Actions */}
-            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-white/80 backdrop-blur-xl border border-gray-100 rounded-full shadow-2xl z-[100]">
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-3 sm:py-4 bg-white/80 backdrop-blur-xl border border-gray-100 rounded-full shadow-2xl z-[100] w-[calc(100%-2rem)] sm:w-auto justify-center max-w-md">
                 <button
                     type="button"
                     onClick={() => router.push('/agent/blog')}
-                    className="flex items-center gap-2 px-6 py-2.5 text-gray-500 font-bold hover:text-prestige-navy transition-colors"
+                    className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 text-gray-500 font-bold hover:text-prestige-navy transition-colors text-sm"
                 >
                     <X size={18} />
                     Cancel
@@ -221,12 +221,12 @@ export default function BlogForm({ initialData }: BlogFormProps) {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="flex items-center gap-2 px-10 py-3 bg-prestige-navy text-white font-bold rounded-full hover:bg-prestige-navy/90 transition-all shadow-lg hover:shadow-prestige-navy/20 active:scale-95 disabled:opacity-50"
+                    className="flex items-center justify-center gap-2 px-6 sm:px-10 py-2.5 sm:py-3 bg-prestige-navy text-white font-bold rounded-full hover:bg-prestige-navy/90 transition-all shadow-lg hover:shadow-prestige-navy/20 active:scale-95 disabled:opacity-50 text-sm whitespace-nowrap"
                 >
                     {loading ? (
-                        <Loader2 className="animate-spin" size={20} />
+                        <Loader2 className="animate-spin" size={18} />
                     ) : (
-                        <Save size={20} />
+                        <Save size={18} />
                     )}
                     {initialData?.id ? 'Update Insight' : 'Publish Insight'}
                 </button>

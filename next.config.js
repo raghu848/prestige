@@ -30,6 +30,22 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.googleusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.yahoo.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '**.yahoo.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.rediff.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '**.rediff.com',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

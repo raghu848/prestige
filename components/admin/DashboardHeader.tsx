@@ -91,6 +91,50 @@ export default function DashboardHeader() {
                     </Link>
                 </div>
             </div>
+
+            {/* Mobile Sub-Navigation */}
+            <div className="md:hidden border-t border-gray-100 bg-white/50 backdrop-blur-md px-4 py-2.5 overflow-x-auto flex gap-1 scrollbar-none">
+                <Link
+                    href="/agent/dashboard"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 ${pathname === '/agent/dashboard'
+                        ? 'bg-prestige-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-prestige-navy'
+                        }`}
+                >
+                    <LayoutDashboard size={14} />
+                    Overview
+                </Link>
+                <Link
+                    href="/agent/projects"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 ${pathname.startsWith('/agent/projects') && pathname !== '/agent/projects/new'
+                        ? 'bg-prestige-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-prestige-navy'
+                        }`}
+                >
+                    <Building2 size={14} />
+                    Properties
+                </Link>
+                <Link
+                    href="/agent/dashboard/inquiries"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 ${pathname === '/agent/dashboard/inquiries'
+                        ? 'bg-prestige-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-prestige-navy'
+                        }`}
+                >
+                    <MessageSquare size={14} />
+                    Inquiries
+                </Link>
+                <Link
+                    href="/agent/blog"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 ${pathname.startsWith('/agent/blog')
+                        ? 'bg-prestige-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-prestige-navy'
+                        }`}
+                >
+                    <span className="w-3 h-3 rounded-sm border-2 border-current flex-shrink-0" />
+                    Blog
+                </Link>
+            </div>
         </header>
     )
 }

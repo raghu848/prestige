@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import {
     BedDouble,
     Bath,
@@ -105,7 +105,7 @@ export default async function PropertyDetailPage(props: {
         <div className="pt-24 pb-24">
             {/* Hero Gallery */}
             <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden bg-gray-900">
-                <Image
+                <SafeImage
                     src={property.featured_image}
                     alt={property.title}
                     fill
@@ -188,7 +188,7 @@ export default async function PropertyDetailPage(props: {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {property.gallery_images.map((img: string, idx: number) => (
                                         <div key={idx} className="relative h-64 rounded-xl overflow-hidden group">
-                                            <Image
+                                            <SafeImage
                                                 src={img}
                                                 alt={`Gallery ${idx}`}
                                                 fill
