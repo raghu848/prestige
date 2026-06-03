@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
 
@@ -34,7 +34,7 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
             <Link href={`/projects/${project.category}/${project.slug}`}>
               <div className="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
                 <div className="relative h-48">
-                  <Image
+                  <SafeImage
                     src={project.hero_image_url || '/images/placeholder-project.jpg'}
                     alt={project.name}
                     fill

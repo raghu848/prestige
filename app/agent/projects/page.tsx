@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { Plus, Edit, Star, Eye, Building2, MapPin } from 'lucide-react'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import DeletePropertyButton from '@/components/admin/DeletePropertyButton'
 
 export default async function ProjectsPage() {
@@ -66,7 +66,8 @@ export default async function ProjectsPage() {
                 </Link>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead className="bg-[#0a1529] text-white">
@@ -97,7 +98,7 @@ export default async function ProjectsPage() {
                                         <td className="px-8 py-6">
                                             <div className="flex items-center space-x-5">
                                                 <div className="relative w-20 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
-                                                    <Image
+                                                    <SafeImage
                                                         src={property.featured_image}
                                                         alt={property.title}
                                                         fill
@@ -169,6 +170,89 @@ export default async function ProjectsPage() {
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            {/* Mobile Cards View */}
+            <div className="block md:hidden space-y-4">
+                {properties?.length === 0 ? (
+                    <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-sm">
+                        <div className="inline-flex p-4 bg-gray-50 rounded-full text-gray-300 mb-4">
+                            <Building2 size={32} />
+                        </div>
+                        <p className="text-gray-500 font-medium text-lg">Your inventory is empty.</p>
+                        <Link href="/agent/projects/new" className="text-prestige-gold font-bold hover:underline mt-2 inline-block">
+                            Add your first property
+                        </Link>
+                    </div>
+                ) : (
+                    properties?.map((property) => (
+                        <div key={property.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
+                            <div className="flex items-start justify-between gap-4">
+                                <div className="flex gap-4">
+                                    <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                                        <SafeImage
+                                            src={property.featured_image}
+                                            alt={property.title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <div className="flex flex-wrap items-center gap-1.5">
+                                            <span className="font-bold text-prestige-navy text-sm">{property.title}</span>
+                                            {property.is_featured && (
+                                                <span className="bg-amber-50 p-0.5 rounded text-prestige-gold">
+                                                    <Star size={12} className="fill-prestige-gold text-prestige-gold" />
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="flex items-center text-[10px] text-gray-400 mt-0.5 uppercase tracking-wider font-semibold">
+                                            <MapPin size={10} className="mr-0.5 text-prestige-gold" />
+                                            {property.city}
+                                        </div>
+                                    </div>
+                                </div>
+                                <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${
+                                    property.status === 'available' ? 'bg-emerald-50 text-emerald-700' :
+                                    property.status === 'sold' ? 'bg-rose-50 text-rose-700' :
+                                    'bg-indigo-50 text-indigo-700'
+                                }`}>
+                                    {property.status}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-3 border-t border-gray-50">
+                                <div>
+                                    <span className="text-[10px] text-gray-400 uppercase font-bold tracking-tighter block leading-none">Valuation</span>
+                                    <span className="text-prestige-navy font-bold text-base mt-0.5 inline-block">
+                                        ${property.price.toLocaleString()}
+                                    </span>
+                                </div>
+                                <span className="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-lg">
+                                    {property.property_type}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-50">
+                                <Link
+                                    href={`/properties/${property.slug}`}
+                                    className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                    title="View Public Page"
+                                >
+                                    <Eye size={18} />
+                                </Link>
+                                <Link
+                                    href={`/agent/projects/${property.id}/edit`}
+                                    className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all"
+                                    title="Edit Property"
+                                >
+                                    <Edit size={18} />
+                                </Link>
+                                <DeletePropertyButton id={property.id} title={property.title} />
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
         </div>
     )

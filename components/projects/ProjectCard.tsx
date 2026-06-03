@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import { motion } from 'framer-motion'
 import { MapPin, ArrowRight } from 'lucide-react'
 
@@ -36,7 +36,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className="bg-white rounded-xl overflow-hidden shadow-lg card-hover"
       >
         <div className="relative h-64 overflow-hidden">
-          <Image
+          <SafeImage
             src={project.hero_image_url || '/images/placeholder-project.jpg'}
             alt={project.name}
             fill

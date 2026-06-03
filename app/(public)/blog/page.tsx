@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import { Calendar, ArrowRight } from 'lucide-react'
 
 export default async function BlogPage() {
@@ -63,8 +63,8 @@ export default async function BlogPage() {
                   className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col"
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={post.featured_image_url || 'https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop'}
+                    <SafeImage
+                      src={post.featured_image_url}
                       alt={post.title}
                       fill
                       className="object-cover transform group-hover:scale-110 transition-transform duration-700"

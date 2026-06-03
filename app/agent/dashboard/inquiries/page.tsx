@@ -64,18 +64,18 @@ export default async function InquiriesPage() {
     return (
         <div className="max-w-6xl mx-auto space-y-10 pb-20">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-4xl font-[family-name:var(--font-playfair)] font-bold text-prestige-navy">
+                    <h1 className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] font-bold text-prestige-navy">
                         Client Inquiries
                     </h1>
-                    <p className="text-gray-500 mt-2 font-[family-name:var(--font-outfit)]">
+                    <p className="text-gray-500 mt-2 font-[family-name:var(--font-outfit)] text-sm sm:text-base">
                         Manage your leads and property engagement.
                     </p>
                 </div>
                 <Link
                     href="/agent/dashboard"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-100 bg-white text-gray-500 rounded-xl font-bold hover:bg-gray-50 transition-all shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:py-3 border border-gray-100 bg-white text-gray-500 rounded-xl font-bold hover:bg-gray-50 transition-all shadow-sm text-sm"
                 >
                     <ArrowLeft size={18} />
                     Back to Insight
@@ -85,43 +85,43 @@ export default async function InquiriesPage() {
             {/* inquiries List */}
             <div className="grid grid-cols-1 gap-6">
                 {inquiries?.length === 0 ? (
-                    <div className="bg-white rounded-3xl border border-gray-100 p-24 text-center">
+                    <div className="bg-white rounded-3xl border border-gray-100 p-12 sm:p-24 text-center">
                         <div className="inline-flex p-5 bg-gray-50 rounded-2xl text-gray-300 mb-6">
                             <MessageSquare size={48} />
                         </div>
                         <h3 className="text-xl font-bold text-prestige-navy mb-2">No active leads</h3>
-                        <p className="text-gray-400 max-w-sm mx-auto">When clients express interest in your properties, their inquiries will materialize here for your review.</p>
+                        <p className="text-gray-400 max-w-sm mx-auto text-sm">When clients express interest in your properties, their inquiries will materialize here for your review.</p>
                     </div>
                 ) : (
                     inquiries?.map((inquiry: any) => (
                         <div key={inquiry.id} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
                             <div className="flex flex-col lg:flex-row">
                                 {/* Meta Panel */}
-                                <div className="lg:w-80 bg-gray-50/50 p-8 border-r border-gray-50 flex flex-col justify-between">
+                                <div className="lg:w-80 bg-gray-50/50 p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-gray-100 flex flex-col justify-between">
                                     <div>
                                         <div className="flex items-center gap-3 mb-6">
-                                            <div className="w-12 h-12 bg-prestige-navy text-prestige-gold rounded-xl flex items-center justify-center font-bold text-lg shadow-inner">
+                                            <div className="w-12 h-12 bg-prestige-navy text-prestige-gold rounded-xl flex items-center justify-center font-bold text-lg shadow-inner flex-shrink-0">
                                                 {inquiry.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-prestige-navy text-lg leading-tight">{inquiry.name}</h3>
+                                                <h3 className="font-bold text-prestige-navy text-lg leading-tight truncate max-w-[180px] lg:max-w-none">{inquiry.name}</h3>
                                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Potential Client</p>
                                             </div>
                                         </div>
 
                                         <div className="space-y-4">
                                             <div className="flex items-center gap-3 text-sm text-gray-500 font-medium">
-                                                <Mail size={16} className="text-prestige-gold" />
+                                                <Mail size={16} className="text-prestige-gold flex-shrink-0" />
                                                 <span className="truncate">{inquiry.email}</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-sm text-gray-500 font-medium">
-                                                <Phone size={16} className="text-prestige-gold" />
-                                                {inquiry.phone || 'N/A'}
+                                                <Phone size={16} className="text-prestige-gold flex-shrink-0" />
+                                                <span className="truncate">{inquiry.phone || 'N/A'}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="mt-8 pt-8 border-t border-gray-100">
+                                    <div className="mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-gray-100">
                                         <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-tighter">
                                             <Clock size={12} />
                                             Received {new Date(inquiry.created_at).toLocaleDateString(undefined, {
@@ -134,15 +134,15 @@ export default async function InquiriesPage() {
                                 </div>
 
                                 {/* Content Panel */}
-                                <div className="flex-1 p-8 lg:p-10">
-                                    <div className="flex items-start justify-between mb-8">
-                                        <div className="bg-indigo-50/50 px-4 py-2 rounded-xl border border-indigo-100 inline-flex items-center gap-2">
-                                            <Home size={16} className="text-indigo-600" />
-                                            <div className="text-xs font-bold text-indigo-900 uppercase tracking-wide">
+                                <div className="flex-1 p-6 sm:p-8 lg:p-10">
+                                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6 sm:mb-8">
+                                        <div className="bg-indigo-50/50 px-4 py-2 rounded-xl border border-indigo-100 inline-flex items-center gap-2 max-w-full">
+                                            <Home size={16} className="text-indigo-600 flex-shrink-0" />
+                                            <div className="text-xs font-bold text-indigo-900 uppercase tracking-wide truncate">
                                                 Interest in: <span className="text-indigo-600">{inquiry.properties?.title || 'General Property Inquiry'}</span>
                                             </div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full uppercase tracking-widest">
+                                        <span className="self-start sm:self-auto text-[10px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full uppercase tracking-widest">
                                             New Message
                                         </span>
                                     </div>
@@ -151,18 +151,18 @@ export default async function InquiriesPage() {
                                         <div className="absolute top-0 left-0 -ml-4 -mt-2 opacity-5 text-prestige-navy">
                                             <MessageSquare size={64} />
                                         </div>
-                                        <blockquote className="relative z-10 text-lg text-prestige-navy/80 font-[family-name:var(--font-outfit)] leading-relaxed italic">
+                                        <blockquote className="relative z-10 text-base sm:text-lg text-prestige-navy/80 font-[family-name:var(--font-outfit)] leading-relaxed italic">
                                             "{inquiry.message}"
                                         </blockquote>
                                     </div>
 
-                                    <div className="mt-10 flex gap-4">
-                                        <a href={`mailto:${inquiry.email}`} className="px-6 py-3 bg-prestige-navy text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2">
+                                    <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                                        <a href={`mailto:${inquiry.email}`} className="px-6 py-3 bg-prestige-navy text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
                                             <Mail size={16} />
                                             Draft Reply
                                         </a>
                                         {inquiry.phone && (
-                                            <a href={`tel:${inquiry.phone}`} className="px-6 py-3 border border-gray-100 rounded-xl font-bold text-sm text-gray-600 hover:bg-gray-50 transition-all flex items-center gap-2">
+                                            <a href={`tel:${inquiry.phone}`} className="px-6 py-3 border border-gray-100 rounded-xl font-bold text-sm text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
                                                 <Phone size={16} />
                                                 Contact Client
                                             </a>

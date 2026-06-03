@@ -67,7 +67,7 @@ export default async function DashboardPage() {
             {err.message || 'Unknown connection error (Check 525 SSL or paused project)'}
           </div>
           <p className="text-sm text-rose-600 font-medium">
-            Please restoration your project in the Supabase Dashboard and run the <code>database/schema.sql</code> and <code>database/supabase-seed.sql</code> scripts.
+            Please restore your project in the Supabase Dashboard and run the <code>database/schema.sql</code> and <code>database/supabase-seed.sql</code> scripts.
           </p>
         </div>
       )

@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { Save, X, Upload, Plus, Loader2, Building2, MapPin, DollarSign, Ruler, Bed, Bath, Info } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 
 const propertySchema = z.object({
     title: z.string().min(5, 'Title must be at least 5 characters'),
@@ -178,50 +178,50 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
         }
     }
 
-    const inputClasses = "w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-prestige-gold/10 focus:border-prestige-gold outline-none transition-all duration-300 font-[family-name:var(--font-outfit)] text-prestige-navy placeholder-gray-300 shadow-sm"
-    const labelClasses = "flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2.5 ml-1"
+    const inputClasses = "w-full px-4 py-2.5 sm:px-5 sm:py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-4 focus:ring-prestige-gold/10 focus:border-prestige-gold outline-none transition-all duration-300 font-[family-name:var(--font-outfit)] text-prestige-navy placeholder-gray-300 shadow-sm"
+    const labelClasses = "flex items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2.5 ml-1"
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 max-w-5xl mx-auto pb-20">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-10 max-w-5xl mx-auto pb-20">
             {/* Header / Intro */}
-            <div className="flex items-center justify-between bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm gap-6">
                 <div>
-                    <h2 className="text-2xl font-[family-name:var(--font-playfair)] font-bold text-prestige-navy">
+                    <h2 className="text-xl sm:text-2xl font-[family-name:var(--font-playfair)] font-bold text-prestige-navy">
                         {id && id !== 'new' ? 'Edit Luxury Listing' : 'Publish New Masterpiece'}
                     </h2>
-                    <p className="text-gray-400 text-sm font-medium mt-1 uppercase tracking-wider">Property Management Suite</p>
+                    <p className="text-gray-400 text-xs sm:text-sm font-medium mt-1 uppercase tracking-wider">Property Management Suite</p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 w-full sm:w-auto">
                     <button
                         type="button"
                         onClick={() => router.back()}
-                        className="px-6 py-3 border border-gray-100 font-bold text-gray-500 rounded-xl hover:bg-gray-50 transition-all text-sm"
+                        className="flex-1 sm:flex-initial px-4 sm:px-6 py-2.5 sm:py-3 border border-gray-100 font-bold text-gray-500 rounded-xl hover:bg-gray-50 transition-all text-sm text-center"
                     >
                         Discard
                     </button>
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="px-8 py-3 bg-prestige-navy text-white rounded-xl flex items-center gap-2 font-bold hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm disabled:opacity-50"
+                        className="flex-1 sm:flex-initial px-6 sm:px-8 py-2.5 sm:py-3 bg-prestige-navy text-white rounded-xl flex items-center justify-center gap-2 font-bold hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm disabled:opacity-50"
                     >
                         {submitting ? (
                             <><Loader2 className="animate-spin" size={18} /> Processing...</>
                         ) : (
-                            <><Save size={18} /> {id && id !== 'new' ? 'Apply Changes' : 'Authorize Publication'}</>
+                            <><Save size={18} /> <span className="whitespace-nowrap">{id && id !== 'new' ? 'Apply Changes' : 'Authorize Publication'}</span></>
                         )}
                     </button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
                 {/* Left Column: Details */}
                 <div className="lg:col-span-2 space-y-10">
                     {/* Basic Info */}
-                    <div className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden">
+                    <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-8 opacity-5">
                             <Info size={120} />
                         </div>
-                        <h3 className="text-xl font-bold mb-8 text-prestige-navy flex items-center gap-3 relative z-10">
+                        <h3 className="text-xl font-bold mb-6 sm:mb-8 text-prestige-navy flex items-center gap-3 relative z-10">
                             <span className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center italic font-serif">i</span>
                             Primary Definitions
                         </h3>
@@ -279,12 +279,12 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
                     </div>
 
                     {/* Technical Specs */}
-                    <div className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
-                        <h3 className="text-xl font-bold mb-8 text-prestige-navy flex items-center gap-3">
+                    <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-sm border border-gray-100">
+                        <h3 className="text-xl font-bold mb-6 sm:mb-8 text-prestige-navy flex items-center gap-3">
                             <span className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center italic font-serif">s</span>
                             Specifications & Location
                         </h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
                             <div>
                                 <label className={labelClasses}><Bed size={14} /> Suites</label>
                                 <input type="number" {...register('bedrooms', { valueAsNumber: true })} className={inputClasses} />
@@ -319,7 +319,7 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
                                     <input {...register('city')} className={inputClasses} placeholder="Luxury Hub Center" />
                                     {errors.city && <p className="text-rose-500 text-[10px] font-bold uppercase mt-2 ml-1 tracking-wider">{errors.city.message}</p>}
                                 </div>
-                                <div className="flex items-center gap-3 mt-8 ml-2">
+                                <div className="flex items-center gap-3 mt-2 md:mt-8 ml-1 md:ml-2">
                                     <input
                                         type="checkbox"
                                         id="is_featured"
@@ -337,7 +337,7 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
 
                 {/* Right Column: Media */}
                 <div className="space-y-10">
-                    <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 sticky top-24">
+                    <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100 sticky top-24">
                         <h3 className="text-lg font-bold mb-6 text-prestige-navy flex items-center gap-3">
                             <span className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-serif italic text-sm">m</span>
                             Visual Assets
@@ -352,7 +352,7 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
                             >
                                 {featuredImage ? (
                                     <>
-                                        <Image src={featuredImage} alt="Showcase" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                                        <SafeImage src={featuredImage} alt="Showcase" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <Upload className="text-white" size={24} />
                                         </div>
@@ -380,7 +380,7 @@ export default function PropertyForm({ initialData, id }: PropertyFormProps) {
                             <div className="grid grid-cols-2 gap-3 mb-4">
                                 {galleryImages.map((url, index) => (
                                     <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group border border-gray-100">
-                                        <Image src={url} alt={`Gallery ${index}`} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <SafeImage src={url} alt={`Gallery ${index}`} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                         <button
                                             type="button"
                                             onClick={() => removeGalleryImage(url)}

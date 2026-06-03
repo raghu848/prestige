@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import SafeImage from '@/components/ui/SafeImage'
 import { MapPin, Check } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -82,7 +82,7 @@ export default function ProjectTabs({ project }: ProjectTabsProps) {
             {project.floor_plan_urls && Array.isArray(project.floor_plan_urls) && project.floor_plan_urls.length > 0 ? (
               project.floor_plan_urls.map((url: string, index: number) => (
                 <div key={index} className="relative w-full h-96 rounded-lg overflow-hidden">
-                  <Image
+                  <SafeImage
                     src={url}
                     alt={`Floor Plan ${index + 1}`}
                     fill
@@ -105,7 +105,7 @@ export default function ProjectTabs({ project }: ProjectTabsProps) {
             {project.image_urls && Array.isArray(project.image_urls) && project.image_urls.length > 0 ? (
               project.image_urls.map((url: string, index: number) => (
                 <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
-                  <Image
+                  <SafeImage
                     src={url}
                     alt={`Gallery Image ${index + 1}`}
                     fill

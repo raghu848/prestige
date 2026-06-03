@@ -100,8 +100,10 @@ export default function InteractiveMap() {
   }, [])
 
   return (
-    <section className="section-padding bg-gray-50">
-      <div className="container-custom">
+    <section className="section-padding bg-gradient-to-b from-[#020617] to-slate-950 relative overflow-hidden z-10">
+      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none z-0" />
+
+      <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Side */}
           <motion.div
@@ -110,23 +112,23 @@ export default function InteractiveMap() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-prestige-navy mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
               Explore Our Locations
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-slate-450 mb-8 font-light leading-relaxed">
               Discover premium properties across prime locations. Whether you're looking for a luxury home, a strategic commercial space, or a leasing opportunity, our map helps you find the perfect spot.
             </p>
             <ul className="space-y-4 mb-8">
-              <li className="flex items-center text-gray-700">
-                <span className="w-2 h-2 bg-prestige-gold rounded-full mr-3"></span>
+              <li className="flex items-center text-slate-300 font-medium">
+                <span className="w-2.5 h-2.5 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full mr-3 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
                 Strategic locations in city centers
               </li>
-              <li className="flex items-center text-gray-700">
-                <span className="w-2 h-2 bg-prestige-gold rounded-full mr-3"></span>
+              <li className="flex items-center text-slate-300 font-medium">
+                <span className="w-2.5 h-2.5 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full mr-3 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
                 Easy connectivity to major hubs
               </li>
-              <li className="flex items-center text-gray-700">
-                <span className="w-2 h-2 bg-prestige-gold rounded-full mr-3"></span>
+              <li className="flex items-center text-slate-300 font-medium">
+                <span className="w-2.5 h-2.5 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full mr-3 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
                 Premium neighborhoods with high appreciation
               </li>
             </ul>
@@ -134,9 +136,9 @@ export default function InteractiveMap() {
               href={`https://www.google.com/maps/dir/?api=1&destination=${center.lat},${center.lng}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="button-89 inline-flex items-center justify-center w-full sm:w-auto text-decoration-none"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all hover:scale-105 shadow-[0_4px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.45)] text-decoration-none w-full sm:w-auto"
             >
-              Get Directions <ArrowRight className="ml-2" size={20} />
+              Get Directions <ArrowRight className="ml-2" size={16} />
             </a>
           </motion.div>
 
@@ -146,10 +148,10 @@ export default function InteractiveMap() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-[500px] rounded-2xl overflow-hidden shadow-2xl relative z-0"
+            className="h-[500px] rounded-3xl overflow-hidden shadow-2xl relative z-0 border border-amber-500/20 p-1 bg-slate-900/40 backdrop-blur-md dark-map"
           >
             {isMounted && (
-              <MapContainer center={[center.lat, center.lng]} zoom={12} style={{ height: '100%', width: '100%' }}>
+              <MapContainer center={[center.lat, center.lng]} zoom={12} style={{ height: '100%', width: '100%', borderRadius: '1.25rem' }}>
                 <LeafletIconFix />
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -161,17 +163,17 @@ export default function InteractiveMap() {
                     position={[project.location_coords.lat, project.location_coords.lng]}
                   >
                     <Popup>
-                      <div className="p-2 min-w-[200px]">
-                        <h3 className="font-bold text-prestige-navy text-lg mb-1">{project.name}</h3>
-                        <p className="text-sm text-gray-600 capitalize mb-1">{project.category}</p>
-                        <p className="text-sm font-semibold text-prestige-gold mb-2">
+                      <div className="p-1 min-w-[200px]">
+                        <h3 className="font-bold text-white text-base mb-1">{project.name}</h3>
+                        <p className="text-xs text-slate-400 capitalize mb-2">{project.category}</p>
+                        <p className="text-sm font-bold text-amber-300 mb-3">
                           From ₹{(project.price_min / 10000000).toFixed(1)} Cr
                         </p>
                         <Link
                           href={`/projects/${project.category}/${project.slug}`}
-                          className="text-white bg-prestige-navy px-3 py-1 rounded text-xs inline-flex items-center hover:bg-prestige-gold transition-colors"
+                          className="text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-450 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider inline-flex items-center transition-all shadow-[0_2px_8px_rgba(245,158,11,0.25)] no-underline"
                         >
-                          View Details <ArrowRight size={12} className="ml-1" />
+                          View Details <ArrowRight size={10} className="ml-1" />
                         </Link>
                       </div>
                     </Popup>

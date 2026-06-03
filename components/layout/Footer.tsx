@@ -33,9 +33,13 @@ export default function Footer() {
             <p className="brand-desc text-[13px] leading-relaxed text-[rgba(255,255,255,0.38)] max-w-[260px] mb-6 font-[family-name:var(--font-outfit)]">
               Your trusted partner in premium real estate. Delivering excellence across residential, commercial, and leasing projects since 1998.
             </p>
-            <div className="flex gap-2.5 mb-2">
+            <div className="flex gap-3 mb-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                <a key={i} href="#" className="footer-social-btn hover:scale-105 transition-transform">
+                <a 
+                  key={i} 
+                  href="#" 
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:text-slate-950 hover:border-amber-400 hover:scale-110 hover:shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-300"
+                >
                   <Icon size={16} />
                 </a>
               ))}

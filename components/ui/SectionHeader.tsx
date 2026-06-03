@@ -17,18 +17,18 @@ export default function SectionHeader({ title, subtitle, align = 'left' }: Secti
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                <span className="text-prestige-gold font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
+                <span className="text-amber-400 font-bold tracking-[0.25em] uppercase text-xs mb-3 block">
                     Elite Real Estate
                 </span>
-                <h2 className="text-4xl md:text-5xl font-display font-bold text-prestige-navy mb-4 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4 leading-tight">
                     {title}
                 </h2>
                 {subtitle && (
-                    <p className="text-gray-500 text-lg leading-relaxed">
+                    <p className="text-slate-400 text-lg leading-relaxed font-light">
                         {subtitle}
                     </p>
                 )}
-                <div className={`mt-6 h-1 w-20 bg-prestige-gold ${align === 'center' ? 'mx-auto' : ''}`} />
+                <div className={`mt-6 h-[2px] w-24 bg-gradient-to-r from-amber-400 to-transparent ${align === 'center' ? 'mx-auto' : ''}`} />
             </motion.div>
         </div>
     )
