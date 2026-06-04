@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectFilters from '@/components/projects/ProjectFilters'
 import { Suspense } from 'react'
+import ConstructionScroll from '@/components/projects/ConstructionScroll'
+
 
 export default async function ProjectsPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -69,6 +71,7 @@ export default async function ProjectsPage(props: {
 
   return (
     <div className="pt-20 min-h-screen bg-gray-50/50">
+      <ConstructionScroll />
       <div className="container-custom py-12">
         <div className="mb-12">
           <h1 className="text-4xl md:text-6xl font-[family-name:var(--font-playfair)] font-bold text-prestige-navy mb-4">
